@@ -4,12 +4,15 @@
 provider "aws" {
   region = "us-east-2"
 }
-
 provider "random" {}
 
 data "aws_availability_zones" "available" {}
 
 resource "random_pet" "random" {}
+
+ephemeral "random_password" "db_password" {
+  length = 16
+}
 
 module "vpc" {
   source  = "terraform-aws-modules/vpc/aws"
